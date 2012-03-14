@@ -1,0 +1,16 @@
+---
+layout: blog
+title: Announcing Arquillian Maven Plugin 1.0.0.Alpha2
+author: Davide D'Alto
+tags: [ maven, releases ]
+--- 
+
+h3. Highlights in this release
+
+p. Arquillian configuration file can be set using the arquillianXml property.
+
+p. You can start/stop a container without deploy/undeploy if you have other means of deploying to it.
+
+p. Two new commands have been added for remote containers: deployRemote and undeployRemote.
+
+p. Commands can now be bound to different phases.
