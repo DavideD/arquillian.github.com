@@ -1,0 +1,79 @@
+---
+--- 
+
+p. A Maven plugin with support for start/deploy/undeploy/stop and run operations using the Arquillian Containers.
+
+h3. Highlights in this release
+
+p. Arquillian configuration file can be set using the arquillianXml property.
+
+bc(prettify).. <plugin>
+    <groupId>org.jboss.arquillian.maven</groupId>
+    <artifactId>arquillian-maven-plugin</artifactId>
+    <version>1.0.0.Alpha2</version>
+    <configuration>
+        <arquillianXml>myArquillian-conf.xml</arquillianXml>
+    </configuration>
+</plugin>
+
+p. You can now bind commands to different phases and start/stop a container without deploy/undeploy if you have other means of deploying to it.
+
+bc(prettify).. <plugin>
+     <groupId>org.jboss.arquillian.maven</groupId>
+     <artifactId>arquillian-maven-plugin</artifactId>
+     <version>1.0.0.Alpha2</version>
+     <executions>
+         <execution>
+             <id>start-managed-container</id>
+             <phase>pre-integration-test</phase>
+             <goals>
+                 <goal>start</goal>
+             </goals>
+         </execution>
+         <execution>
+             <id>stop-managed-container</id>
+             <phase>post-integration-test</phase>
+             <goals>
+                 <goal>stop</goal>
+             </goals>
+         </execution>
+    </executions>
+</plugin>
+
+p. Two new goals have been added: *deployRemote* and *undeployRemote*.
+You can use them to deploy/undeploy an artifact to a remote container.
+
+p. In the terminal:
+
+bc(prettify).. mvn package arquillian:deployRemote
+
+bc(prettify).. mvn package arquillian:undeployRemote
+
+p. In the pom.xml:
+
+bc(prettify).. <plugin>
+    <groupId>org.jboss.arquillian.maven</groupId>
+    <artifactId>arquillian-maven-plugin</artifactId>
+    <version>1.0.0.Alpha2</version>
+    <executions>
+        <execution>
+            <id>deploy-to-remote-container</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+                <goal>deployRemote</goal>
+            </goals>
+        </execution>
+        <execution>
+           <id>undeploy-from-remote-container</id>
+            <phase>post-integration-test</phase>
+            <goals>
+                <goal>undeployRemote</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+
+p. Let us know your opinion about the plugin and share your ideas on how to improve it. 
+
+p. Cheers!
+
